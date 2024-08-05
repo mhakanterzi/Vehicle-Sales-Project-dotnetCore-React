@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Login from './UserAuth/Login';
+import Register from './UserAuth/Register';
+import MainMenu from './MainMenu/MainMenu';
+import { Container, Navbar, Nav, Button } from 'react-bootstrap';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
+  const [showRegister, setShowRegister] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container className="App">
+      <Navbar bg="dark" variant="dark">
+        <Navbar.Brand href="#home"></Navbar.Brand>
+        <Nav className="ml-auto">
+          {isLoggedIn ? (
+            <>
+              <Navbar.Text>Signed in as: {user}</Navbar.Text>
+              <Button variant="outline-light" onClick={() => setIsLoggedIn(false)}>Logout</Button>
+            </>
+          ) : null}
+        </Nav>
+      </Navbar>
+      <div className="mt-5">
+        {!isLoggedIn ? (
+          <>
+            {showRegister ? (
+              <Register setShowRegister={setShowRegister} />
+            ) : (
+              <>
+                <Login setIsLoggedIn={setIsLoggedIn} setUser={setUser} />
+              </>
+            )}
+          </>
+        ) : (
+          <MainMenu />
+        )}
+      </div>
+    </Container>
   );
 }
 

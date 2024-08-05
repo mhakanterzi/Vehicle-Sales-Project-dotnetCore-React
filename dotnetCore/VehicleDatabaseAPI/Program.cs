@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using VehicleDatabaseAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,9 @@ builder.Services.AddCors(options =>
 
 
 
+// Configure Entity Framework and SQL Server
+builder.Services.AddDbContext<VehicleDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Swagger/OpenAPI configuration
 builder.Services.AddEndpointsApiExplorer();
