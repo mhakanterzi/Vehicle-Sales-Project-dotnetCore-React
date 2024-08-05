@@ -1,0 +1,41 @@
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+
+# IDE specific files
+.vscode/
+*.log
+*.tmp
+
+# NuGet
+*.nupkg
+*.snupkg
+
+# ASP.NET
+*.pdb
+*.dll
+
+# JetBrains Rider
+.idea/
+
+# Rider
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Build results
+/build/
+/out/
+
+# Debugging
+*.log
+*.tmp
