@@ -11,6 +11,7 @@ namespace VehicleDatabaseAPI.Data
         }
 
         public DbSet<Customer> Customer { get; set; }
+        public DbSet<Category> Category { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
