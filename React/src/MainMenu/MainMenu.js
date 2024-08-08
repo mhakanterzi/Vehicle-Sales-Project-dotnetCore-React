@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import Category from '../Menu/Category';
+import Vehicle from '../Menu/Vehicles'
 
 const MainMenu = () => {
   const [showCategory, setShowCategory] = useState(false);
+  const [showVehicle, setShowVehicle] = useState(false);
+
 
   const handleCategory = () => {
     setShowCategory(true);
@@ -15,6 +18,16 @@ const MainMenu = () => {
     return <Category onBackToMenu={handleBackToMenu} />;
   }
 
+  const handleVehicle = () => {
+    setShowVehicle(true);
+  };
+  const handleVehicleBack = () => {
+    setShowVehicle(false);
+  };
+  if(showVehicle){
+    return <Vehicle onBackToMenu={handleVehicleBack} />;
+  };
+
   return (
     <Card className="mb-3">
       <Card.Body>
@@ -23,7 +36,7 @@ const MainMenu = () => {
           <Button variant="primary" onClick={handleCategory} className="mb-2">
             Category
           </Button>
-          <Button variant="primary"  className="mb-2">
+          <Button variant="primary" onClick={handleVehicle}  className="mb-2">
             Vehlice
           </Button>
         </div>
