@@ -27,7 +27,7 @@ namespace VehicleDatabaseAPI.Controllers
         [HttpGet("plate")]
         public IActionResult GetSaleInfo(string plate)
         {
-            var sale = _context.VehicleSaleInfo.FirstOrDefault(s => s.Plate == plate);
+            var sale = _context.VehicleSaleInfo.Find(plate);
             if (plate == null)
             {
                 return NotFound();

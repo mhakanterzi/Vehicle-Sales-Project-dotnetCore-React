@@ -7,14 +7,19 @@ const SaledVehicle = ({ onBackToMenu }) => {
 
     useEffect(() => {
         const fetchVehicles = async () => {
-                const response = await axios.get('https://localhost:7284/api/VehicleSaleInfo');
-                const filteredVehicles = response.data.filter(vehicle => vehicle.onSale === false);
+                const responseSaleInfo = await axios.get('https://localhost:7284/api/VehicleSaleInfo');
+                const responseVehicle = await axios.get('https://localhost:7284/api/Vehicle');
+
+                const AllData = responseSaleInfo.data.map(saleInfo => {
+                    const vehicleData = responseVehicle.data.find(vehicle => vehicle.plate === saleInfo.plate);
+                    return { ...saleInfo, ...vehicleData };
+                });
+
+                const filteredVehicles = AllData.filter(vehicle => vehicle.onSale === false);
                 setOnSaled(filteredVehicles);
         };
-        
         fetchVehicles();
     }, []);
-
     const handleDeleteVehicle = async (vehicleToDelete) => {
         await axios.delete(`https://localhost:7284/api/VehicleSaleInfo/plate?plate=${vehicleToDelete.plate}`);
         const selectedVehicle = onSaled.filter(vehicle =>
@@ -40,7 +45,7 @@ const SaledVehicle = ({ onBackToMenu }) => {
                     {onSaled.map((vehicle, index) => (
                         <li key={index}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                <div style={{ flex: 1, textAlign: 'center' }}>{vehicle.category}</div>
+                                <div style={{ flex: 1, textAlign: 'center' }}>{vehicle.categoryName}</div>
                                 <div style={{ flex: 1, textAlign: 'center' }}>{vehicle.brand}</div>
                                 <div style={{ flex: 1, textAlign: 'center' }}>{vehicle.model}</div>
                                 <div style={{ flex: 1, textAlign: 'center' }}>{vehicle.year}</div>

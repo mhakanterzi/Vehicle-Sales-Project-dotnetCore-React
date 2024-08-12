@@ -4,16 +4,25 @@ import axios from "axios";
 
 const OnSaleVehicle = ({ onBackToMenu }) => {
     const [onSale, setOnSale] = useState([]);
+    const [vehicleInfo, setVehicleInfo] = useState([]);
+
 
 
     useEffect(() => {
         const fetchVehicles = async () => {
                 const response = await axios.get('https://localhost:7284/api/VehicleSaleInfo');
-                setOnSale(response.data.filter(vehicle => vehicle.onSale));
+                const responseVehicle = await axios.get('https://localhost:7284/api/Vehicle')
 
-        };
-        fetchVehicles();
-    }, []);
+                const AllData = response.data.map(saleInfo => {
+                    const vehicleData = responseVehicle.data.find(v => v.plate === saleInfo.plate);
+                    return { ...saleInfo, ...vehicleData };
+                });
+        
+                const filteredVehicles = AllData.filter(vehicle => vehicle.onSale);
+                setOnSale(filteredVehicles);
+            };
+            fetchVehicles();
+        }, []);
 
     const handleDeleteVehicle = async (vehicleToDelete) => {
             await axios.delete(`https://localhost:7284/api/VehicleSaleInfo/plate?plate=${vehicleToDelete.plate}`);
@@ -22,7 +31,7 @@ const OnSaleVehicle = ({ onBackToMenu }) => {
     };
 
     const addOnSaled = async (vehicle, price) => {
-            const vehicleWithPrice = { ...vehicle, price, onSale: false };
+            const vehicleWithPrice = { ...vehicle,vehicleInfo , price, onSale: false };
 
             await axios.put(`https://localhost:7284/api/VehicleSaleInfo/plate?plate=${vehicle.plate}`, vehicleWithPrice);
 
