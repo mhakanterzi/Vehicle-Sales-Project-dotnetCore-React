@@ -16,7 +16,7 @@ const Login = ({ setIsLoggedIn, setUser }) => {
       .then((response) => {
         const user = response.data.find(user => user.email === email && user.password === password);
         if (user) {
-          setUser(user.firstName); // veya user.LastName
+          setUser(user.firstName); 
           setIsLoggedIn(true);
         } else {
           alert('Invalid email or password');
@@ -57,7 +57,7 @@ const Login = ({ setIsLoggedIn, setUser }) => {
             <Button 
               variant="primary" 
               onClick={() => setShowRegister(true)}
-              style={{ marginLeft: '10px' }} // Add some space between buttons
+              style={{ marginLeft: '10px' }} 
             >
               Register
             </Button>

@@ -28,7 +28,6 @@ const EditCategory = ({ onBackToMenu }) => {
                 return;
             }
 
-            // Ensure to include the correct category name in the URL
             await axios.put(`https://localhost:7284/api/Category/${selectedCategory}`, {
                 categoryName: newCategory,
                 isActive: categoryToUpdate.isActive,

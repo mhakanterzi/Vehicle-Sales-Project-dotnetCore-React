@@ -57,18 +57,12 @@ const UpdateVehicle = ({ onBackToMenu }) => {
 
         console.log("Updated Vehicle Data:", updatedVehicle);
 
-        try {
             const response = await axios.put(`https://localhost:7284/api/Vehicle/${selectedPlate}`, updatedVehicle);
             console.log("Update Response:", response);
             alert('Vehicle updated successfully.');
-            // Güncelleme sonrası state'i de güncelle
             setUpdateVehicle(updateVehicle.map(v => 
                 v.plate === selectedPlate ? { ...v, brand: newBrand, model: newModel, year: newYear, plate: newPlate, categoryName: newCategoryName } : v
             ));
-        } catch (error) {
-            console.error('Failed to update vehicle:', error.response);
-            alert(`Failed to update vehicle. ${JSON.stringify(error.response.data)}`);
-        }
     };
 
     return (

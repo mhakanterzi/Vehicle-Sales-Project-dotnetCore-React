@@ -16,7 +16,6 @@ namespace VehicleDatabaseAPI.Controllers
             _context = context;
         }
 
-        // GET: api/Customer
         [HttpGet]
         public IActionResult GetCustomers()
         {
@@ -24,7 +23,6 @@ namespace VehicleDatabaseAPI.Controllers
             return Ok(customers);
         }
 
-        // GET: api/Customer/5
         [HttpGet("{id}")]
         public IActionResult GetCustomer(int id)
         {
@@ -36,7 +34,6 @@ namespace VehicleDatabaseAPI.Controllers
             return Ok(customer);
         }
 
-        // POST: api/Customer
         [HttpPost]
         public IActionResult PostCustomer(Customer customer)
         {
@@ -45,7 +42,6 @@ namespace VehicleDatabaseAPI.Controllers
             return CreatedAtAction(nameof(GetCustomer), new { id = customer.CustomerID }, customer);
         }
 
-        // PUT: api/Customer/5
         [HttpPut("{id}")]
         public IActionResult PutCustomer(int id, Customer customer)
         {
@@ -59,7 +55,6 @@ namespace VehicleDatabaseAPI.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Customer/5
         [HttpDelete("{id}")]
         public IActionResult DeleteCustomer(int id)
         {

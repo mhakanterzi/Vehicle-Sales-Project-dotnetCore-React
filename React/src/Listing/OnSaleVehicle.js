@@ -4,8 +4,6 @@ import axios from "axios";
 
 const OnSaleVehicle = ({ onBackToMenu }) => {
     const [onSale, setOnSale] = useState([]);
-    const [vehicleInfo, setVehicleInfo] = useState([]);
-
 
 
     useEffect(() => {
@@ -31,7 +29,7 @@ const OnSaleVehicle = ({ onBackToMenu }) => {
     };
 
     const addOnSaled = async (vehicle, price) => {
-            const vehicleWithPrice = { ...vehicle,vehicleInfo , price, onSale: false };
+            const vehicleWithPrice = { ...vehicle , price, onSale: false };
 
             await axios.put(`https://localhost:7284/api/VehicleSaleInfo/plate?plate=${vehicle.plate}`, vehicleWithPrice);
 

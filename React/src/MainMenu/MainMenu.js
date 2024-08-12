@@ -3,11 +3,13 @@ import { Button, Card } from 'react-bootstrap';
 import Category from '../Menu/Category';
 import Vehicle from '../Menu/Vehicles'
 import Listing from '../Menu/Listing'
+import Customer from '../Menu/Customer';
 
 const MainMenu = () => {
   const [showCategory, setShowCategory] = useState(false);
   const [showVehicle, setShowVehicle] = useState(false);
   const [showListing, setShowListing] = useState(false)
+  const [showCustomer, setShowCustomer] = useState(false)
 
 
   const handleCategory = () => {
@@ -41,6 +43,17 @@ const MainMenu = () => {
     return <Listing onBackToMenu={handleListingBack} />
   }
 
+
+  const handleCustomer=()=>{
+    setShowCustomer(true)
+  }
+  const handleCustomerBack=()=>{
+    setShowCustomer(false)
+  }
+  if(showCustomer){
+    return <Customer onBackToMenu={handleCustomerBack} />
+  }
+
   return (
     <Card className="mb-3">
       <Card.Body>
@@ -57,7 +70,7 @@ const MainMenu = () => {
           <Button variant="primary" onClick={handleListing} className="mb-2">
             listing
           </Button>
-          <Button variant="primary"  className="mb-2">
+          <Button variant="primary" onClick={handleCustomer} className="mb-2">
             Customer
           </Button>
         </div>
